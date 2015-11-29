@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
-mongoose.connect('mongodb://localhost/simpleblog');
+var env = process.env.NODE_ENV || 'development';
+var config = require('../config/config.'+env);
+
+mongoose.connect(config.dbConnection);
 
 var UserSchema = mongoose.Schema({
   name: {
