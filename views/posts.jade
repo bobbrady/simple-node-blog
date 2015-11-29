@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	.panel
+		h1.page-header
+			| Page Header
+			small
+				| Secondary Text
+		// Posts loog
+		if posts
+			each post, i in posts
+				h2
+					a(href='#')	#{post.title}
+				p.lead
+					|	by
+					a(href='#')	#{post.author}
+				p
+					span.glyphicon.glyphicon-time
+					|  Posted on #{post.created}
+				hr
+				img.img-responsive(src='http://placehold.it/900x300', alt='')
+				hr
+				p
+					| #{post.body}
+				a.btn.btn-primary(href='#')
+					| Read More
+					span.glyphicon.glyphicon-chevron-right
+				hr
+
