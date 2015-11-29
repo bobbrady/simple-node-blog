@@ -1,0 +1,39 @@
+body {
+  background-color: #e8e8e8;
+}
+a,
+a:hover,
+a:focus {
+  color: #b90504;
+  text-decoration: none;
+}
+#custom-bootstrap-header-row.row {
+  background-color: #f6f6f6;
+  margin: 0;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav {
+  width: 100%;
+  text-align: center;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav > li {
+  float: none;
+  display: inline-block;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a {
+  color: #333;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:focus {
+  color: #b90504;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover {
+  color: #b90504;
+  background-color: #f6f6f6;
+}
+.panel {
+  padding-left: 25px;
+  padding-right: 25px;
+  background-color: #f6f6f6;
+}

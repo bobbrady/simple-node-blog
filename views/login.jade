@@ -1,0 +1,13 @@
+extends layout
+
+block content
+	h1 Login
+	p Please login with the form below
+	form(method='post', action='/users/login', enctype='multipart/form-data')
+		.form-group
+			label Email
+			input.form-control(name='email', type='email', placeholder='Enter Email')
+		.form-group
+			label Password
+			input.form-control(name='password', type='password', placeholder='Enter Password')
+		input.btn.btn-default(name='login', type='submit', value='login')

@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+	head
+		include ./includes/head.jade
+	body
+		include ./includes/header.jade
+		// Begin Body
+		.container
+			.row
+				.col.col-md-8
+					include ./includes/flash-messages.jade
+					block content
+				.col.col-md-4
+					block sidebar
+						include ./includes/default-sidebar.jade
+			.row
+				.col-lg-12
+			block footer
+				include ./includes/footer.jade
+			// script references
+			script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+			script(src='/javascripts/bootstrap.js')

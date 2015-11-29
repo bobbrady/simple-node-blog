@@ -1,0 +1,7 @@
+*.log
+*.*-workspace
+npm-debug.log
+
+logs
+uploads
+node_modules

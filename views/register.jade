@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	h1 Register
+	p Please register with the form below
+	form(method='post', action='/users/register', enctype='multipart/form-data')
+		.form-group
+			label Name
+			input.form-control(name='name', type='text', placeholder='Enter Name', min='3', max='80',required)
+		.form-group
+			label Email
+			input.form-control(name='email', type='email', placeholder='Enter Email', required)
+		.form-group
+			label Password
+			input.form-control(id='password', name='password', type='password', placeholder='Enter Password', pattern='.{8,20}', required title='Password must be between 8 to 20 characters long')
+		.form-group
+			label Confirm Password
+			input.form-control(id='password2', name='password2', type='password', placeholder='Enter Password',pattern='.{8,20}', required title='Password must be between 8 to 20 characters long')
+		.form-group
+			label Avatar
+			input.form-control(name='avatar', type='file')
+		input.btn.btn-default(name='submit', type='submit', value='register')
+
+block scripts
+	script(src='/javascripts/validate-password.js')

@@ -1,0 +1,42 @@
+.container
+	#custom-bootstrap-header-row.row
+		.col-md-12
+			img.img-responsive.center-block(src='/images/bradythnk-logo-cropped.png')
+	.row
+		.col-md-12
+			// Navigation
+			nav#custom-bootstrap-menu.navbar.navbar-default.navbar-static-top(role='navigation')
+				.container
+					// Brand and toggle get grouped for better mobile display
+					.navbar-header
+						button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+							span.sr-only Toggle navigation
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+					// Collect the nav links, forms, and other content for toggling
+					#bs-example-navbar-collapse-1.collapse.navbar-collapse
+						ul.nav.navbar-nav
+							li(class=(title == 'Home' ? 'active' : ''))
+								a(href='/') Home
+							li(class=(title == 'Category1' ? 'active' : ''))
+								a(href='/category1') Category1
+							li(class=(title == 'About' ? 'active' : ''))
+								a(href='/about') About
+							li(class=(title == 'Contact' ? 'active' : ''))
+								a(href='/contact') Contact
+							if adminEnabled
+								li.dropdown
+									a.dropdown-toggle(data-target='#', href='page.html', data-toggle='dropdown')
+										| Admin
+										b.caret
+									ul.dropdown-menu
+										if !user
+											li(class=(title == 'Register' ? 'active' : ''))
+												a(href='/users/register') Register
+											li(class=(title == 'Login' ? 'active' : ''))
+												a(href='/users/login') Login
+										if user
+											li
+												a(href='/users/logout') Log Out
+
