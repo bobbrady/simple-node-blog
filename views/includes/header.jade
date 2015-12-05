@@ -27,9 +27,9 @@
 								a(href='/contact') Contact
 							if adminEnabled
 								li.dropdown
-									a.dropdown-toggle(data-target='#', href='page.html', data-toggle='dropdown')
+									a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 										| Admin
-										b.caret
+										span.caret
 									ul.dropdown-menu
 										if !user
 											li(class=(title == 'Register' ? 'active' : ''))

@@ -23,6 +23,10 @@ var postController = require('./controllers/posts');
 
 var app = express();
 
+// Add globals
+app.locals.adminEnabled = config.adminEnabled;
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -60,7 +64,6 @@ app.use(function(req, res, next) {
 	res.locals.success = req.flash('success');
 	res.locals.error = req.flash('error');
 	res.locals.user = req.user || null;
-	res.locals.adminEnabled = config.adminEnabled;
 	next();
 });
 
