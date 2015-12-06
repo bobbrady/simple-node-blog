@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	h1 Add Post
+	p Please register with the form below
+	form(method='post', action='/posts', enctype='multipart/form-data')
+		.form-group
+			label Title
+			.row
+				.col-sm-9
+					input.form-control(name='title', type='text', placeholder='Enter Blog TItle',required)
+		.form-group
+			label Category
+			.row
+				.col-sm-5
+					select.form-control(name='category', placeholder='Select Category', required)
+						option(value='JavaScript') JavaScript
+						option(value='Node.js') Node.js
+		.form-group
+			label Content
+			textarea.form-control(id='content', name='content', required)
+		.form-group
+			label Cover Image
+			input.form-control(name='coverImage', type='file')
+		input.btn.btn-default(name='submit', type='submit', value='Add')
+		script(src='/ckeditor/ckeditor.js')
+		script
+			| CKEDITOR.replace('content');

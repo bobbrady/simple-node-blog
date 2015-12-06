@@ -37,6 +37,8 @@
 											li(class=(title == 'Login' ? 'active' : ''))
 												a(href='/users/login') Login
 										if user
+											li(class=(title == 'Add Post' ? 'active' : ''))
+												a(href='/posts/addPost') Add Post
 											li
 												a(href='/users/logout') Log Out
 
