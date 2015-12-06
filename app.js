@@ -31,8 +31,18 @@ app.locals.adminEnabled = config.adminEnabled;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// File upload confguraation
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
 app.use(multer({
-	dest: './public/images/uploads'
+	storage: storage
 }).any());
 
 // uncomment after placing your favicon in /public
