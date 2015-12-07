@@ -6,25 +6,49 @@ var PostSchema = mongoose.Schema({
 		type: String,
 		index: true
 	},
-	category:{
+	category: {
 		type: String,
 		required: true,
 		index: true
 	},
 	content: {
-		type:String,
+		type: String,
 		required: true
 	},
-	created:{
+	slug: {
+		type: String
+	},
+	created: {
 		type: Date,
 		default: Date.now,
 		required: true
 	},
-  coverImage: {
-    type: String,
-    required: false
-  }
+	coverImage: {
+		type: String,
+		required: false
+	}
 });
 
-var Post = module.exports = mongoose.model('Post', PostSchema);
+/*
+ * Thanks to mathewbyme for the slugify snippet
+ *
+ * https://gist.github.com/mathewbyrne/1280286
+ *
+ */
+PostSchema.statics.slugify = function(text) {
+	return text.toString().toLowerCase()
+		.replace(/\s+/g, '-') // Replace spaces with -
+		.replace(/[^\w\-]+/g, '') // Remove all non-word chars
+		.replace(/\-\-+/g, '-') // Replace multiple - with single -
+		.replace(/^-+/, '') // Trim - from start of text
+		.replace(/-+$/, ''); // Trim - from end of text
+};
 
+
+PostSchema.pre('save', function(next) {
+	this.slug = PostSchema.statics.slugify(this.title);
+	next();
+});
+
+
+var Post = module.exports = mongoose.model('Post', PostSchema);

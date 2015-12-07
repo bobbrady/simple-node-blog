@@ -1,6 +1,7 @@
 var express = require('express');
 var controller = express.Router();
 var Post = require('../models/post');
+var Category = require('../models/category');
 
 controller.get('/', function(req, res) {
   Post.find({}, function(err, posts) {
@@ -11,15 +12,14 @@ controller.get('/', function(req, res) {
   });
 });
 
-controller.post('/', isAuthenticated,  function(req, res) {
+controller.post('/', isAuthenticated, function(req, res) {
   var title = req.body.title;
   var category = req.body.category;
   var content = req.body.content;
   var coverImage = null;
   if (req.files && req.files[0]) {
-    var coverImageOriginalName = req.files[0].originalname;
-    coverimage = req.files[0].filename;
-    console.log('Uploading File ', coverImageOriginalName, coverImage);
+    coverImage = req.files[0].originalname;
+    console.log('Uploading File ', coverImage);
   } else {
     coverImage = 'noimage.png';
   }
@@ -47,8 +47,11 @@ controller.post('/', isAuthenticated,  function(req, res) {
 });
 
 controller.get('/addPost', isAuthenticated, function(req, res) {
-  res.render('addPost', {
-    'title': 'Add Post'
+  Category.find({}, function(err, categories) {
+    res.render('addPost', {
+      'title': 'Add Post',
+      'categories': categories
+    });
   });
 });
 

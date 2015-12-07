@@ -14,8 +14,8 @@ block content
 			.row
 				.col-sm-5
 					select.form-control(name='category', placeholder='Select Category', required)
-						option(value='JavaScript') JavaScript
-						option(value='Node.js') Node.js
+						each category, i in categories
+							option(value='#{category.category}') #{category.category}
 		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)
