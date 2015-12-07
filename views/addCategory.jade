@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	h1=title
+	form(method='post', action='/categories', enctype="multipart/form-data")
+		.form-group
+			label Category:
+			input.form-control(name='category', type='text')
+		input.btn.btn-default(name='submit',type='submit',value='Save')

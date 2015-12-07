@@ -11,7 +11,7 @@ controller.get('/', function(req, res) {
   });
 });
 
-controller.post('/', function(req, res) {
+controller.post('/', isAuthenticated,  function(req, res) {
   var title = req.body.title;
   var category = req.body.category;
   var content = req.body.content;
@@ -46,10 +46,17 @@ controller.post('/', function(req, res) {
   res.redirect('/');
 });
 
-controller.get('/addPost', function(req, res) {
+controller.get('/addPost', isAuthenticated, function(req, res) {
   res.render('addPost', {
     'title': 'Add Post'
   });
 });
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}
 
 module.exports = controller;

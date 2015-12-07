@@ -20,6 +20,7 @@ mongoose.connect(config.dbConnection);
 var homeController = require('./controllers/index');
 var userController = require('./controllers/users');
 var postController = require('./controllers/posts');
+var categoryController = require('./controllers/categories');
 
 var app = express();
 
@@ -82,6 +83,7 @@ app.use('/', homeController);
 app.use('/posts', postController);
 if(config.adminEnabled) {
 	app.use('/users', userController);
+	app.use('/categories', categoryController);
 }
 
 

@@ -8,7 +8,8 @@ var PostSchema = mongoose.Schema({
 	},
 	category:{
 		type: String,
-		required: true
+		required: true,
+		index: true
 	},
 	content: {
 		type:String,
