@@ -21,6 +21,7 @@ var homeController = require('./controllers/index');
 var userController = require('./controllers/users');
 var postController = require('./controllers/posts');
 var categoryController = require('./controllers/categories');
+var blogController = require('./controllers/blog');
 
 var app = express();
 
@@ -85,6 +86,7 @@ if(config.adminEnabled) {
 	app.use('/users', userController);
 	app.use('/categories', categoryController);
 }
+app.use('/', blogController);
 
 
 // catch 404 and forward to error handler
