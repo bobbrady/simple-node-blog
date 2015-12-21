@@ -13,9 +13,10 @@ block content
 			label Category
 			.row
 				.col-sm-5
-					select.form-control(name='category', placeholder='Select Category', required)
+					select.form-control(name='category', required)
+						option(value='' selected disabled) Select Category
 						each category, i in categories
-							option(value='#{category.category}') #{category.category}
+							option(value='#{category.name}') #{category.name}
 		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)

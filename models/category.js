@@ -1,13 +1,16 @@
 var mongoose = require('mongoose');
 
-// Category Schema
-var CategorySchema = mongoose.Schema({
-	category: {
-		type: String,
-		required: true,
-		index: true
-	}
-});
+var CategorySchema = {
+  name: {
+    type: String,
+    unique: true,
+    required: true,
+    index: true
+  },
+  parent: String,
+  ancestors: [String]
+};
+
 
 var Category = module.exports = mongoose.model('Category', CategorySchema);
 

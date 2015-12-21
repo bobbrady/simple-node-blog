@@ -47,7 +47,7 @@ controller.post('/', isAuthenticated, function(req, res) {
 });
 
 controller.get('/addPost', isAuthenticated, function(req, res) {
-  Category.find({}, function(err, categories) {
+  Category.find({}).sort({'name': 1}).exec(function(err, categories) {
     res.render('addPost', {
       'title': 'Add Post',
       'categories': categories
