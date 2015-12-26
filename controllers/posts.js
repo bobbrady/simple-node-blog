@@ -14,11 +14,13 @@ controller.get('/', function(req, res) {
 });
 
 controller.post('/', isAuthenticated, function(req, res) {
+  console.log('req.body %j', req.body);
   var title = req.body.title;
   var category = req.body.category;
   var content = req.body.content;
   var coverImage = null;
-  var categoryHome = true;
+  var categoryHome = req.body.categoryHome;
+
   if (req.files && req.files[0]) {
     coverImage = req.files[0].originalname;
     console.log('Uploading File ', coverImage);
@@ -32,9 +34,6 @@ controller.post('/', isAuthenticated, function(req, res) {
     content: content,
     coverImage: coverImage
   });
-
-  console.log('req.body %j', req.body);
-
 
   async.waterfall([
     function(callback) {
@@ -50,7 +49,7 @@ controller.post('/', isAuthenticated, function(req, res) {
     },
     function(post, callback) {
       console.log('categoryHome: ', categoryHome);
-      if (categoryHome === true) {
+      if (categoryHome === 'true') {
         Category.findOneAndUpdate({
           "name": post.category
         }, {

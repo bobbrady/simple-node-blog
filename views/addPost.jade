@@ -18,6 +18,16 @@ block content
 						each category, i in categories
 							option(value='#{category.name}') #{category.name}
 		.form-group
+			label Category Home Page
+			.radio
+				label
+					input(type="radio", name="categoryHome", value="false", checked)
+					| No
+			.radio
+				label
+					input(type="radio", name="categoryHome", value="true")
+					| Yes
+		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)
 		.form-group
