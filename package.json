@@ -16,6 +16,7 @@
     "express": "*",
     "express-session": "*",
     "jade": "*",
+    "method-override": "^2.3.5",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "*",

@@ -14,6 +14,7 @@ var flash = require('connect-flash');
 var env = process.env.NODE_ENV || 'development';
 var config = require('./config/config.'+env);
 var mongoose =require('mongoose');
+var methodOverride = require('method-override');
 
 mongoose.connect(config.dbConnection);
 
@@ -32,6 +33,9 @@ app.locals.adminEnabled = config.adminEnabled;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+
+app.use(methodOverride('_method'));
 
 // File upload confguraation
 var storage = multer.diskStorage({

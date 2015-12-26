@@ -89,6 +89,17 @@ controller.get('/addPost', isAuthenticated, function(req, res) {
   });
 });
 
+controller.delete('/:slug', isAuthenticated, function(req, res) {
+  Post.findOneAndRemove({
+    slug: req.params.slug
+  }, function(err) {
+    if (err) throw err;
+    console.log('Post %s deleted', req.params.slug);
+    req.flash('success', 'Post ' + req.params.slug + ' was deleted');
+    res.redirect('/');
+  });
+});
+
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
