@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var PostSchema = mongoose.Schema({
 	title: {
 		type: String,
-		index: true
+		index: true,
+		unique: true
 	},
 	category: {
 		type: String,
@@ -16,7 +17,9 @@ var PostSchema = mongoose.Schema({
 		required: true
 	},
 	slug: {
-		type: String
+		type: String,
+		index: true,
+		unique: true
 	},
 	created: {
 		type: Date,

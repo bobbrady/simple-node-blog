@@ -1,4 +1,5 @@
 var express = require('express');
+var async = require('async');
 var controller = express.Router();
 var Post = require('../models/post');
 var Category = require('../models/category');
@@ -17,6 +18,7 @@ controller.post('/', isAuthenticated, function(req, res) {
   var category = req.body.category;
   var content = req.body.content;
   var coverImage = null;
+  var categoryHome = true;
   if (req.files && req.files[0]) {
     coverImage = req.files[0].originalname;
     console.log('Uploading File ', coverImage);
@@ -33,12 +35,43 @@ controller.post('/', isAuthenticated, function(req, res) {
 
   console.log('req.body %j', req.body);
 
-  Post.create(post, function(err, post) {
-    if (err) {
-      console.log('Post %j creation error: %j', err);
+
+  async.waterfall([
+    function(callback) {
+      Post.create(post, function(err, post) {
+        if (err) {
+          console.log('Post %j creation error: %j', err);
+          callback(err, null);
+        } else {
+          console.log('Post created: %j', post);
+          callback(null, post);
+        }
+      });
+    },
+    function(post, callback) {
+      console.log('categoryHome: ', categoryHome);
+      if (categoryHome === true) {
+        Category.findOneAndUpdate({
+          "name": post.category
+        }, {
+          "homePage": post.slug
+        }, function(err, category) {
+          if (err) {
+            console.log('Category update error', err);
+            callback(err, null);
+          } else {
+            console.log('Updated Category %s to home page %s', category.name, post.slug);
+            callback(err, post);
+          }
+        });
+      } else {
+        callback(null, post);
+      }
+    }
+  ], function(error, post) {
+    if (error) {
       req.flash('error', 'There was an error during Post creation: ' + err);
     } else {
-      console.log('Post created: %j', post);
       req.flash('success', 'Post ' + post.title + ' was created');
     }
   });
@@ -47,7 +80,9 @@ controller.post('/', isAuthenticated, function(req, res) {
 });
 
 controller.get('/addPost', isAuthenticated, function(req, res) {
-  Category.find({}).sort({'name': 1}).exec(function(err, categories) {
+  Category.find({}).sort({
+    'name': 1
+  }).exec(function(err, categories) {
     res.render('addPost', {
       'title': 'Add Post',
       'categories': categories

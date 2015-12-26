@@ -7,6 +7,7 @@ var CategorySchema = {
     required: true,
     index: true
   },
+  homePage: String,
   parent: String,
   ancestors: [String]
 };
