@@ -37,32 +37,15 @@ controller.post('/', isAuthenticated, function(req, res) {
 
   async.waterfall([
     function(callback) {
-      Post.create(post, function(err, post) {
-        if (err) {
-          console.log('Post %j creation error: %j', err);
-          callback(err, null);
-        } else {
-          console.log('Post created: %j', post);
-          callback(null, post);
-        }
-      });
+      Post.create(post, callback);
     },
     function(post, callback) {
-      console.log('categoryHome: ', categoryHome);
       if (categoryHome === 'true') {
         Category.findOneAndUpdate({
           "name": post.category
         }, {
           "homePage": post.slug
-        }, function(err, category) {
-          if (err) {
-            console.log('Category update error', err);
-            callback(err, null);
-          } else {
-            console.log('Updated Category %s to home page %s', category.name, post.slug);
-            callback(err, post);
-          }
-        });
+        }, callback);
       } else {
         callback(null, post);
       }
@@ -90,12 +73,25 @@ controller.get('/addPost', isAuthenticated, function(req, res) {
 });
 
 controller.delete('/:slug', isAuthenticated, function(req, res) {
-  Post.findOneAndRemove({
-    slug: req.params.slug
-  }, function(err) {
-    if (err) throw err;
-    console.log('Post %s deleted', req.params.slug);
-    req.flash('success', 'Post ' + req.params.slug + ' was deleted');
+  async.waterfall([
+    function(callback) {
+      Post.findOneAndRemove({
+        "slug": req.params.slug
+      }, callback);
+    },
+    function(post, callback) {
+      Category.findOneAndUpdate({
+        "homePage": req.params.slug
+      }, {
+        "homePage": null
+      }, callback);
+    }
+  ], function(error, post) {
+    if (error) {
+      req.flash('error', 'There was an error during deletion of Post ' + req.params.slug + ': ' + err);
+    } else {
+      req.flash('success', 'Post ' + req.params.slug + ' was deleted');
+    }
     res.redirect('/');
   });
 });
