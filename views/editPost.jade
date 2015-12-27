@@ -1,14 +1,15 @@
 extends layout
 
 block content
-	h1 Add Post
+	h1 Edit Post
 	p Please register with the form below
-	form(method='post', action='/posts', enctype='multipart/form-data')
+	form(method='post', action='/posts/#{post.slug}?_method=PUT', enctype='multipart/form-data')
+		input.form-control.hidden(type='text', name='_id', hidden='true', value='#{post._id}')
 		.form-group
 			label Title
 			.row
 				.col-sm-9
-					input.form-control(name='title', type='text', placeholder='Enter Blog TItle',required)
+					input.form-control(name='title', type='text', value='#{post.title}',required)
 		.form-group
 			label Category
 			.row
@@ -16,24 +17,27 @@ block content
 					select.form-control(name='category', required)
 						option(value='' selected disabled) Select Category
 						each category, i in categories
-							option(value='#{category.name}') #{category.name}
+							option(value='#{category.name}', selected=(category.name === post.category)) #{category.name}
 		.form-group
 			label Category Home Page
 			.radio
 				label
-					input(type='radio', name='homePage', value='false', checked)
+					input(type='radio', name='homePage', value='false', checked=(post.homePage === false))
 					| No
 			.radio
 				label
-					input(type='radio', name='homePage', value='true')
+					input(type='radio', name='homePage', value='true', checked=(post.homePage === true))
 					| Yes
 		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)
+				| #{post.content}
+
 		.form-group
-			label Cover Image
+			label Cover Image (current value: #{post.coverImage})
 			input.form-control(name='coverImage', type='file')
 		input.btn.btn-default(name='submit', type='submit', value='Add')
 		script(src='/ckeditor/ckeditor.js')
 		script
 			| CKEDITOR.replace('content');
+
