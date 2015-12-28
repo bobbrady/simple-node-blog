@@ -18,13 +18,17 @@ block content
 					span.glyphicon.glyphicon-time
 					|  Posted on #{post.created}
 				hr
-				img.img-responsive(src='http://placehold.it/900x300', alt='')
+				img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='')
 				hr
 				p
-					| #{post.content}
+					| !{post.content}
 				a.btn.btn-primary(href='#')
 					| Read More
 					span.glyphicon.glyphicon-chevron-right
+				p
+				a.btn.btn-success(href='/posts/editPost/#{post.slug}')
+					| Edit
+					span.glyphicon.glyphicon-pencil
 				p
 					form.form.btn-inline(role='form' method='post' action='/posts/#{post.slug}?_method=DELETE')
 						button.btn.btn-primary.btn-danger(type="submit")
