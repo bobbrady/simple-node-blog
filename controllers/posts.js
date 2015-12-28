@@ -1,3 +1,6 @@
+/* jshint node: true */
+'use strict';
+
 var express = require('express');
 var async = require('async');
 var controller = express.Router();
@@ -10,6 +13,58 @@ controller.get('/', function(req, res) {
       'title': 'Posts',
       'posts': posts
     });
+  });
+});
+
+controller.get('/paginated', function(req, res) {
+  var pageLimit = 2;
+  var page = isNaN(Number(req.query.page)) ? 1 : Number(req.query.page);
+  var sort = isNaN(Number(req.query.page)) ? -1 : Number(req.query.sort);
+  var nextDate = isNaN(Number(req.query.nextTime)) ? undefined : new Date(Number(req.query.nextTime));
+  var prevDate = isNaN(Number(req.query.prevTime)) ? undefined : new Date(Number(req.query.prevTime));
+
+  var query = {};
+  if (nextDate || prevDate) {
+    query.created = {};
+    if (nextDate)
+      query.created.$gt = nextDate;
+    if (prevDate)
+      query.created.$lt = prevDate;
+  }
+
+  async.series([
+    function(callback) {
+      Post.find(query).sort({
+        created: sort
+      }).limit(2).exec(callback);
+    },
+    function(callback) {
+      Post.find({}).count().exec(callback);
+    }
+  ], function(error, result) {
+    console.log('paginate result: %j', result);
+    if (error) {
+      req.flash('error', 'There was an error retrieving the posts: ' + error);
+      res.render('posts', {
+        'title': 'Posts',
+        'posts': {}
+      });
+    } else {
+      var pages = Math.ceil(result[1] / pageLimit);
+      var prevPage = page < pages ? page + 1 : 0;
+      var nextPage = page > 1 ? page - 1 : 0;
+      console.log('Pages %d, nextPage %d, prevPage %d', pages, nextPage, prevPage);
+      if(sort === 1) {
+        result[0] = result[0].reverse();
+      }
+      res.render('posts', {
+        'title': 'Posts',
+        'posts': result[0],
+        'count': result[1],
+        'prevPage': prevPage,
+        'nextPage': nextPage
+      });
+    }
   });
 });
 
@@ -123,11 +178,13 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
 
   async.waterfall([
     function(callback) {
-      Post.findOneAndUpdate({"_id": _id}, updatedPost,callback);
+      Post.findOneAndUpdate({
+        "_id": _id
+      }, updatedPost, callback);
     },
     function(post, callback) {
       console.log('Updated POST %j', post);
-     if (homePage === 'false') {
+      if (homePage === 'false') {
         Category.findOneAndUpdate({
           "homePage": _id
         }, {
@@ -168,7 +225,7 @@ controller.delete('/:slug', isAuthenticated, function(req, res) {
     }
   ], function(error, post) {
     if (error) {
-      req.flash('error', 'There was an error during deletion of Post ' + req.params.slug + ': ' + err);
+      req.flash('error', 'There was an error during deletion of Post ' + req.params.slug + ': ' + error);
     } else {
       req.flash('success', 'Post ' + req.params.slug + ' was deleted');
     }

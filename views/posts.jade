@@ -16,7 +16,7 @@ block content
 					a(href='#') #{post.author}
 				p
 					span.glyphicon.glyphicon-time
-					|  Posted on #{post.created}
+					|  Posted on #{post.created} #{post.created.getTime()}
 				hr
 				img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='')
 				hr
@@ -35,5 +35,14 @@ block content
 							button.btn.btn-primary.btn-danger(type="submit")
 								span.glyphicon.glyphicon-trash
 								|	Delete
+			ul.pager
+				if prevPage > 0
+					li.previous
+						a(href='/posts/paginated?page=#{prevPage}&sort=-1&prevTime=#{posts[posts.length-1].created.getTime()}')
+							| &larr; Older
+				if nextPage > 0
+					li.next
+						a(href='/posts/paginated?page=#{nextPage}&sort=1&nextTime=#{posts[0].created.getTime()}')
+							| Newer &rarr;
 				hr
 
