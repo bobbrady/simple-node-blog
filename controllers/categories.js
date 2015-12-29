@@ -1,6 +1,7 @@
 var express = require('express');
 var controller = express.Router();
 var Category = require('../models/category');
+var Util = require('../util/blog-util');
 var async = require('async');
 
 controller.get('/add', function(req, res, next) {
@@ -15,13 +16,13 @@ controller.get('/add', function(req, res, next) {
 });
 
 controller.post('/', function(req, res) {
-  var name = req.body.name;
+  var name = Util.slugify(req.body.name);
   var parentName = req.body.parent;
   var ancestors = [];
   async.waterfall(
     [
       function(callback) {
-        if (parentName === 'Home') {
+        if (parentName === 'home') {
           ancestors.push(parentName);
           var parent = {
             name: parentName

@@ -18,11 +18,10 @@ var methodOverride = require('method-override');
 
 mongoose.connect(config.dbConnection);
 
-var homeController = require('./controllers/index');
+var indexController = require('./controllers/index');
 var userController = require('./controllers/users');
 var postController = require('./controllers/posts');
 var categoryController = require('./controllers/categories');
-var blogController = require('./controllers/blog');
 
 var app = express();
 
@@ -84,13 +83,12 @@ app.use(function(req, res, next) {
 });
 
 // Enable public and admin routes based on env config
-app.use('/', homeController);
 app.use('/posts', postController);
 if(config.adminEnabled) {
 	app.use('/users', userController);
 	app.use('/categories', categoryController);
 }
-app.use('/', blogController);
+app.use('/', indexController);
 
 
 // catch 404 and forward to error handler

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.panel
+		h1.page-header
+			| #{category.title}
+		hr
+		img.img-responsive(src='/images/uploads/#{category.coverImage}', alt='#{category.coverImageAlt}')
+		hr
+		p.lead
+			| !{category.lead}
+		hr
+		p
+			|	!{category.content}
+		hr
+		block posts
+		if adminEnabled && user
+			p
+			form.form.btn-inline(role='form' method='post' action='/posts/#{category.slug}?_method=DELETE')
+				.btn-toolbar(role='group')
+					a.btn.btn-success(href='/posts/editPost/#{category.slug}')
+						span.glyphicon.glyphicon-pencil
+						|	Edit
+					button.btn.btn-primary.btn-danger(type="submit")
+						span.glyphicon.glyphicon-trash
+						|	Delete
+		hr
+

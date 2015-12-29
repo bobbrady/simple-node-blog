@@ -6,6 +6,7 @@ var async = require('async');
 var controller = express.Router();
 var Post = require('../models/post');
 var Category = require('../models/category');
+var Util = require('../util/blog-util');
 
 controller.get('/', function(req, res) {
   Post.find({}, function(err, posts) {
@@ -18,12 +19,13 @@ controller.get('/', function(req, res) {
 
 controller.get('/paginated', function(req, res) {
   var pageLimit = 2;
+  var category = req.query.category;
   var page = isNaN(Number(req.query.page)) ? 1 : Number(req.query.page);
   var sort = isNaN(Number(req.query.page)) ? -1 : Number(req.query.sort);
   var nextDate = isNaN(Number(req.query.nextTime)) ? undefined : new Date(Number(req.query.nextTime));
   var prevDate = isNaN(Number(req.query.prevTime)) ? undefined : new Date(Number(req.query.prevTime));
 
-  var query = {};
+  var query = {category: category};
   if (nextDate || prevDate) {
     query.created = {};
     if (nextDate)
@@ -171,6 +173,7 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
 
   var updatedPost = {
     title: title,
+    slug: Util.slugify(title),
     category: category,
     homePage: homePage,
     lead: lead,

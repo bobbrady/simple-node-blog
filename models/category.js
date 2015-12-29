@@ -16,6 +16,5 @@ var CategorySchema = {
 	ancestors: [String]
 };
 
-
 var Category = module.exports = mongoose.model('Category', CategorySchema);
 

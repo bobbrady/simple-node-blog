@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	.panel
+		h1.page-header
+			| #{post.title}
+		hr
+		p
+			span.glyphicon.glyphicon-time
+			|  Posted on #{post.created.toDateString().substr(4,12)}
+		hr
+		img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='#{post.coverImageAlt}')
+		hr
+		p.lead
+			| !{post.lead}
+		hr
+		p
+			!{post.content}
+		if adminEnabled && user
+			p
+			form.form.btn-inline(role='form' method='post' action='/posts/#{post.slug}?_method=DELETE')
+				.btn-toolbar(role='group')
+					a.btn.btn-success(href='/posts/editPost/#{post.slug}')
+						span.glyphicon.glyphicon-pencil
+						|	Edit
+					button.btn.btn-primary.btn-danger(type="submit")
+						span.glyphicon.glyphicon-trash
+						|	Delete
+		hr
+
