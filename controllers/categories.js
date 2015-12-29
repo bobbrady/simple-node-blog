@@ -4,7 +4,7 @@ var Category = require('../models/category');
 var Util = require('../util/blog-util');
 var async = require('async');
 
-controller.get('/add', function(req, res, next) {
+controller.get('/add', isAuthenticated, function(req, res, next) {
   Category.find({}).sort({
     'name': 1
   }).exec(function(err, categories) {
@@ -15,7 +15,7 @@ controller.get('/add', function(req, res, next) {
   });
 });
 
-controller.post('/', function(req, res) {
+controller.post('/', isAuthenticated, function(req, res) {
   var name = Util.slugify(req.body.name);
   var parentName = req.body.parent;
   var ancestors = [];
@@ -65,5 +65,12 @@ controller.post('/', function(req, res) {
   res.location('/');
   res.redirect('/');
 });
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}
 
 module.exports = controller;

@@ -83,8 +83,8 @@ app.use(function(req, res, next) {
 });
 
 // Enable public and admin routes based on env config
-app.use('/posts', postController);
 if(config.adminEnabled) {
+	app.use('/posts', postController);
 	app.use('/users', userController);
 	app.use('/categories', categoryController);
 }

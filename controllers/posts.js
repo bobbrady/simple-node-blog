@@ -8,68 +8,6 @@ var Post = require('../models/post');
 var Category = require('../models/category');
 var Util = require('../util/blog-util');
 
-controller.get('/', function(req, res) {
-  Post.find({}, function(err, posts) {
-    res.render('posts', {
-      'title': 'Posts',
-      'posts': posts
-    });
-  });
-});
-
-controller.get('/paginated', function(req, res) {
-  var pageLimit = 2;
-  var category = req.query.category;
-  var page = isNaN(Number(req.query.page)) ? 1 : Number(req.query.page);
-  var sort = isNaN(Number(req.query.page)) ? -1 : Number(req.query.sort);
-  var nextDate = isNaN(Number(req.query.nextTime)) ? undefined : new Date(Number(req.query.nextTime));
-  var prevDate = isNaN(Number(req.query.prevTime)) ? undefined : new Date(Number(req.query.prevTime));
-
-  var query = {category: category};
-  if (nextDate || prevDate) {
-    query.created = {};
-    if (nextDate)
-      query.created.$gt = nextDate;
-    if (prevDate)
-      query.created.$lt = prevDate;
-  }
-
-  async.series([
-    function(callback) {
-      Post.find(query).sort({
-        created: sort
-      }).limit(2).exec(callback);
-    },
-    function(callback) {
-      Post.find({}).count().exec(callback);
-    }
-  ], function(error, result) {
-    console.log('paginate result: %j', result);
-    if (error) {
-      req.flash('error', 'There was an error retrieving the posts: ' + error);
-      res.render('posts', {
-        'title': 'Posts',
-        'posts': {}
-      });
-    } else {
-      var pages = Math.ceil(result[1] / pageLimit);
-      var prevPage = page < pages ? page + 1 : 0;
-      var nextPage = page > 1 ? page - 1 : 0;
-      console.log('Pages %d, nextPage %d, prevPage %d', pages, nextPage, prevPage);
-      if(sort === 1) {
-        result[0] = result[0].reverse();
-      }
-      res.render('posts', {
-        'title': 'Posts',
-        'posts': result[0],
-        'count': result[1],
-        'prevPage': prevPage,
-        'nextPage': nextPage
-      });
-    }
-  });
-});
-
 controller.post('/', isAuthenticated, function(req, res) {
   console.log('req.body %j', req.body);
   var title = req.body.title;
