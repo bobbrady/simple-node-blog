@@ -37,3 +37,8 @@ a:focus {
   padding-right: 25px;
   background-color: #f6f6f6;
 }
+hr {
+  border: none;
+  height: 2px;
+  background-color: #e8e8e8; /* Modern Browsers */
+}

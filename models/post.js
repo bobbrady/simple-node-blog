@@ -16,6 +16,10 @@ var PostSchema = mongoose.Schema({
 		type: Boolean,
 		required: true
 	},
+	lead: {
+		type: String,
+		required: true
+	},
 	content: {
 		type: String,
 		required: true

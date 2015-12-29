@@ -29,6 +29,10 @@ block content
 					input(type='radio', name='homePage', value='true', checked=(post.homePage === true))
 					| Yes
 		.form-group
+			label Lead
+			textarea.form-control(id='lead', name='lead', required)
+				| #{post.lead}
+		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)
 				| #{post.content}

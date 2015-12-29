@@ -5,24 +5,20 @@ block content
 		h1.page-header
 			| Page Header
 			small
-				| Secondary Text
+				|	Secondary Text
+		hr
 		// Posts loog
 		if posts
 			each post, i in posts
 				h2
 					a(href='#') #{post.title}
-				p.lead
-					|	by
-					a(href='#') #{post.author}
 				p
 					span.glyphicon.glyphicon-time
-					|  Posted on #{post.created} #{post.created.getTime()}
-				hr
+					|  Posted on #{post.created.toDateString().substr(4,12)}
 				img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='')
-				hr
-				p
-					| !{post.content}
-				a.btn.btn-primary(href='#')
+				p.lead
+					| !{post.lead}
+				a.btn.btn-danger(href='#')
 					| Read More
 					span.glyphicon.glyphicon-chevron-right
 				if adminEnabled && user
@@ -35,6 +31,7 @@ block content
 							button.btn.btn-primary.btn-danger(type="submit")
 								span.glyphicon.glyphicon-trash
 								|	Delete
+				hr
 			ul.pager
 				if prevPage > 0
 					li.previous
@@ -44,5 +41,4 @@ block content
 					li.next
 						a(href='/posts/paginated?page=#{nextPage}&sort=1&nextTime=#{posts[0].created.getTime()}')
 							| Newer &rarr;
-				hr
 
