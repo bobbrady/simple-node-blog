@@ -48,13 +48,8 @@ var getCategoryDTO = function(options, query, cb) {
       }).limit(2).exec(callback);
     },
     function(callback) {
-      Post.find({
-        homePage: {
-          $eq: false
-        }
-      }, {
-        category: options.category
-      }).count().exec(callback);
+      console.log('COUNTQuery %j', query);
+      Post.find(query).count().exec(callback);
     }
   ], cb);
 };

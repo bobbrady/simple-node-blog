@@ -147,7 +147,7 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
     if (error) {
       req.flash('error', 'There was an error during Post creation: ' + error);
     } else {
-      req.flash('success', 'Post ' + post.title + ' was updated');
+      req.flash('success', 'Post ' + updatedPost.title + ' was updated');
     }
   });
   res.location('/');

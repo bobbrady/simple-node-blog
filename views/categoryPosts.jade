@@ -10,7 +10,7 @@ block posts
 			p
 				span.glyphicon.glyphicon-time
 				|  Posted on #{post.created.toDateString().substr(4,12)}
-			a(href='/#{category.slug}/#{post.slug}') #{post.title}
+			a(href='/#{category.slug}/#{post.slug}')
 				img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='')
 			p.lead
 				| !{post.lead}
