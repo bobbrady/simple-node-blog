@@ -15,16 +15,20 @@
     "debug": "*",
     "express": "*",
     "express-session": "*",
+    "https": "^1.0.0",
     "jade": "*",
     "method-override": "^2.3.5",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "*",
     "multer": "*",
+    "nodemailer": "^1.11.0",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
     "serve-favicon": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "util": "^0.10.3",
+    "xoauth2": "^1.1.0"
   }
 }

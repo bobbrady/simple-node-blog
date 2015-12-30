@@ -4,7 +4,13 @@
 var express = require('express');
 var controller = express.Router();
 var async = require('async');
+var https = require('https');
+var Util = require('../util/blog-util');
+var gmailer = require('../util/gmailer');
 var Post = require('../models/post');
+var env = process.env.NODE_ENV || 'development';
+var config = require('../config/config.'+env);
+var util = require('util');
 
 var getPaginateOptions = function(req) {
   var options = {};
@@ -58,6 +64,39 @@ var getCategoryDTO = function(options, query, cb) {
 controller.get('/', function(req, res) {
   res.render('index', {
     title: 'Home'
+  });
+});
+
+/* GET contact page. */
+controller.get('/contact', function(req, res) {
+  res.render('contact', {
+    title: 'Contact'
+  });
+});
+
+controller.post('/contact', function(req, res) {
+  async.waterfall([
+    function(callback) {
+      Util.verifyRecaptcha(req.body["g-recaptcha-response"], callback);
+    },
+    function(result, callback) {
+      var message = util.format(config.gmailer.text, req.body.contactName, req.body.contactEmail,
+          req.body.contactMessage);
+      gmailer.sendMail({
+        from: config.gmailer.from,
+        to: config.gmailer.to,
+        subject: config.gmailer.subject,
+        text:message
+      }, callback);
+    }
+  ], function(err, result) {
+    if (err) {
+      console.log('contact error %j', err);
+      req.flash('error', 'An error during the submission of you message.  Please directly email bradythink');
+    } else {
+      req.flash('success', 'Your message was successfully posted');
+    }
+    res.redirect('/contact');
   });
 });
 
