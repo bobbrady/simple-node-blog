@@ -33,8 +33,7 @@ a:focus {
   background-color: #f6f6f6;
 }
 .panel {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 0 25px 10px;
   background-color: #f6f6f6;
 }
 hr {

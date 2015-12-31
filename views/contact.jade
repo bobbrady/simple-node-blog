@@ -1,28 +1,55 @@
 extends layout
 
 block content
-	h2 Send a Message
-	p
-		| Required fields are marked with an asterisk
-		span.required *
-	#contact-messages
-	form#contact-form.form(role='form', action='/contact', method='post', autocomplete='off')
-		.form-group
-			label(for='contactName')
-				| Your Name
-				span.required  *
-			input#contactName.form-control(type='text', name='contactName', placeholder='Enter Name', required)
-		.form-group
-			label(for='contactEmail')
-				| Your Email
-				span.required  *
-			input#contactEmail.form-control(type='email', name='contactEmail', placeholder='Enter Email', required)
-		.form-group
-			label(for='contactMessage')
-				| Message
-				span.required  *
-			textarea#contactMessage.form-control(name='contactMessage', rows='5', required='')
-		#g-recpatcha.g-recaptcha(data-sitekey='6LdOGhQTAAAAANGibkeOZeQQUWVly-ehYSgfdmGW')
-		input#submit.btn.btn-primary.pull-right(type='submit', name='submit', value='Send')
+	.panel
+		.row
+			.col-sm-3
+				h2 Direct Contact
+				p
+					strong Location
+					br
+					|  Boston, MA, USA
+					br
+					strong Email
+					br
+					a(href='mailto:info@example.com') info@example.com
+					br
+					strong Twitter
+					br
+					a(href='http://twitter.com/username', target='_blank') @username
+					br
+					strong Facebook
+					br
+					a(href='http://facebook.com/username', target='_blank') username
+					br
+					strong Google+
+					br
+					a(href='https://plus.google.com/000000000000000000000?prsrc=3', rel='publisher', target='_blank') User Name
+					br
+			.col-sm-9
+				h2 Send a Message
+				p
+					| Required fields are marked with an asterisk
+					span.required *
+				#contact-messages
+				form#contact-form.form(role='form', action='/contact', method='post', autocomplete='off')
+					.form-group
+						label(for='contactName')
+							| Your Name
+							span.required  *
+						input#contactName.form-control(type='text', name='contactName', placeholder='Enter Name', required)
+					.form-group
+						label(for='contactEmail')
+							| Your Email
+							span.required  *
+						input#contactEmail.form-control(type='email', name='contactEmail', placeholder='Enter Email', required)
+					.form-group
+						label(for='contactMessage')
+							| Message
+							span.required  *
+						textarea#contactMessage.form-control(name='contactMessage', rows='5', required='')
+					.form-group
+						#g-recpatcha.g-recaptcha(data-sitekey='6LdOGhQTAAAAANGibkeOZeQQUWVly-ehYSgfdmGW')
+					input#submit.btn.btn-danger.pull-left(type='submit', name='submit', value='Send')
 	script(src='https://www.google.com/recaptcha/api.js')
 
