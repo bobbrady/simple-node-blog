@@ -8,7 +8,7 @@ block content
 			label Title
 			.row
 				.col-sm-9
-					input.form-control(name='title', type='text', placeholder='Enter Blog TItle',required)
+					input.form-control(name='title', type='text', placeholder='Enter Post TItle',required)
 		.form-group
 			label Category
 			.row
@@ -29,7 +29,10 @@ block content
 					| Yes
 		.form-group
 			label Lead
-			textarea.form-control(id='lead', name='lead', required)
+			textarea.form-control(id='lead', name='lead', placeholder='Enter Post Lead Paragraph', required)
+		.form-group
+			label Description
+			textarea.form-control(name='description', placeholder='Enter Post Description',required)
 		.form-group
 			label Content
 			textarea.form-control(id='content', name='content', required)

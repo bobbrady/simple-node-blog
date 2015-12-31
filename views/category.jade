@@ -3,22 +3,22 @@ extends layout
 block content
 	.panel
 		h1.page-header
-			| #{category.title}
+			| #{post.title}
 		hr
-		img.img-responsive(src='/images/uploads/#{category.coverImage}', alt='#{category.coverImageAlt}')
+		img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='#{post.coverImageAlt}')
 		hr
 		p.lead
-			| !{category.lead}
+			| !{post.lead}
 		hr
 		p
-			|	!{category.content}
+			|	!{post.content}
 		hr
 		block posts
 		if adminEnabled && user
 			p
-			form.form.btn-inline(role='form' method='post' action='/posts/#{category.slug}?_method=DELETE')
+			form.form.btn-inline(role='form' method='post' action='/posts/#{post.slug}?_method=DELETE')
 				.btn-toolbar(role='group')
-					a.btn.btn-success(href='/posts/editPost/#{category.slug}')
+					a.btn.btn-success(href='/posts/editPost/#{post.slug}')
 						span.glyphicon.glyphicon-pencil
 						|	Edit
 					button.btn.btn-primary.btn-danger(type="submit")

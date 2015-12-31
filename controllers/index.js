@@ -62,15 +62,27 @@ var getCategoryDTO = function(options, query, cb) {
 
 /* GET home page. */
 controller.get('/', function(req, res) {
+  var post = {};
+  post.title =  config.blog.title + ' Home';
+  post.description = config.blog.description;
+  post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
+  post.url = config.blog.url;
   res.render('index', {
-    title: 'Home'
+    title: 'Home',
+    post: post
   });
 });
 
 /* GET contact page. */
 controller.get('/contact', function(req, res) {
+   var post = {};
+  post.title =  config.blog.title + ' Contact Page';
+  post.description = post.title;
+  post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
+  post.url = config.blog.url + '/contact';
   res.render('contact', {
-    title: 'Contact'
+    title: 'Contact',
+    post: post
   });
 });
 
@@ -118,9 +130,12 @@ controller.get('/:category', function(req, res, next) {
       if (options.sort === 1) {
         result[1] = result[1].reverse();
       }
+      var post = result[0];
+      post.url = config.blog.url + '/' + post.slug;
+      post.coverImageUrl = config.blog.url + '/images/uploads/' + post.coverImage;
       res.render('categoryPosts', {
-        'title': result[0].title,
-        'category': result[0],
+        'title': post.title,
+        'post': post,
         'posts': result[1],
         'count': result[2],
         'prevPage': prevPage,

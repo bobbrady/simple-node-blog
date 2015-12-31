@@ -30,7 +30,11 @@ block content
 					| Yes
 		.form-group
 			label Lead
-			textarea.form-control(id='lead', name='lead', required)
+			textarea.form-control(id='lead', name='lead', value='#{post.lead}', required)
+				| #{post.lead}
+		.form-group
+			label Description
+			textarea.form-control(id='description', name='description', value='#{post.description}', required)
 				| #{post.lead}
 		.form-group
 			label Content

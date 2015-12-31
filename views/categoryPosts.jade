@@ -1,27 +1,30 @@
 extends category
 
+block metahead
+	include ./includes/meta-head.jade
+
 block posts
 	h2
-		|	!{category.title} Posts
+		|	!{post.title} Posts
 	if posts
-		each post, i in posts
+		each catPost, i in posts
 			h3
-				a(href='/#{category.slug}/#{post.slug}') #{post.title}
+				a(href='/#{post.slug}/#{catPost.slug}') #{catPost.title}
 			p
 				span.glyphicon.glyphicon-time
-				|  Posted on #{post.created.toDateString().substr(4,12)}
-			a(href='/#{category.slug}/#{post.slug}')
-				img.img-responsive(src='/images/uploads/#{post.coverImage}', alt='')
+				|  Posted on #{catPost.created.toDateString().substr(4,12)}
+			a(href='/#{post.slug}/#{catPost.slug}')
+				img.img-responsive(src='/images/uploads/#{catPost.coverImage}', alt='')
 			p.lead
-				| !{post.lead}
-			a.btn.btn-danger(href='/#{category.slug}/#{post.slug}')
+				| !{catPost.lead}
+			a.btn.btn-danger(href='/#{post.slug}/#{catPost.slug}')
 				| Read More
 				span.glyphicon.glyphicon-chevron-right
 			if adminEnabled && user
 				p
-				form.form.btn-inline(role='form' method='post' action='/posts/#{post.slug}?_method=DELETE')
+				form.form.btn-inline(role='form' method='post' action='/posts/#{catPost.slug}?_method=DELETE')
 					.btn-toolbar(role='group')
-						a.btn.btn-success(href='/posts/editPost/#{post.slug}')
+						a.btn.btn-success(href='/posts/editPost/#{catPost.slug}')
 							span.glyphicon.glyphicon-pencil
 							|	Edit
 						button.btn.btn-primary.btn-danger(type="submit")
@@ -31,10 +34,10 @@ block posts
 		ul.pager
 			if prevPage > 0
 				li.previous
-					a(href='/#{category.slug}?page=#{prevPage}&sort=-1&prevTime=#{posts[posts.length-1].created.getTime()}')
+					a(href='/#{post.slug}?page=#{prevPage}&sort=-1&prevTime=#{posts[posts.length-1].created.getTime()}')
 						| &larr; Older
 			if nextPage > 0
 				li.next
-					a(href='/#{category.slug}?page=#{nextPage}&sort=1&nextTime=#{posts[0].created.getTime()}')
+					a(href='/#{post.slug}?page=#{nextPage}&sort=1&nextTime=#{posts[0].created.getTime()}')
 						| Newer &rarr;
 

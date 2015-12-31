@@ -13,6 +13,7 @@ controller.post('/', isAuthenticated, function(req, res) {
   var title = req.body.title;
   var category = req.body.category;
   var lead = req.body.lead;
+  var description = req.body.description;
   var content = req.body.content;
   var coverImage = null;
   var homePage = req.body.homePage;
@@ -29,6 +30,7 @@ controller.post('/', isAuthenticated, function(req, res) {
     category: category,
     homePage: homePage,
     lead: lead,
+    description: description,
     content: content,
     coverImage: coverImage
   });
@@ -98,6 +100,7 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
   var title = req.body.title;
   var category = req.body.category;
   var lead = req.body.lead;
+  var description = req.body.description;
   var content = req.body.content;
   var coverImage = null;
   var homePage = req.body.homePage;
@@ -115,6 +118,7 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
     category: category,
     homePage: homePage,
     lead: lead,
+    description: description,
     content: content,
     coverImage: coverImage
   };
