@@ -1,8 +1,5 @@
 extends layout
 
-block metahead
-	include ./includes/meta-head.jade
-
 block content
 	.panel
 		.row
@@ -15,19 +12,23 @@ block content
 					br
 					strong Email
 					br
-					a(href='mailto:info@example.com') info@example.com
-					br
-					strong Twitter
-					br
-					a(href='http://twitter.com/username', target='_blank') @username
+					a(href='mailto:#{toEmail}')
+						| #{toEmail}
 					br
 					strong Facebook
 					br
-					a(href='http://facebook.com/username', target='_blank') username
+					a(href='http://facebook.com/#{facebookHandle}', target='_blank')
+						| #{facebookHandle}
 					br
-					strong Google+
+					strong Twitter
 					br
-					a(href='https://plus.google.com/000000000000000000000?prsrc=3', rel='publisher', target='_blank') User Name
+					a(href='http://twitter.com/#{twitterHandle}', target='_blank')
+						| @#{twitterHandle}
+					br
+					strong Linkedin
+					br
+					a(href='https://www.linkedin.com/in/#{linkedinHandle}/', target='_blank')
+						| #{linkedinHandle}
 					br
 			.col-sm-9
 				h2 Send a Message

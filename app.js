@@ -27,6 +27,10 @@ var app = express();
 
 // Add globals
 app.locals.adminEnabled = config.adminEnabled;
+app.locals.toEmail = config.gmailer.to;
+app.locals.twitterHandle = config.social.twitterHandle;
+app.locals.facebookHandle = config.social.facebookHandle;
+app.locals.linkedinHandle = config.social.linkedinHandle;
 app.locals.blogTitle = config.blog.title;
 app.locals.disqusName = config.blog.disqusName;
 

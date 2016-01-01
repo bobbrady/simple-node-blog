@@ -1,7 +1,4 @@
-extends layout
-
-block metahead
-	include ./includes/meta-head.jade
+extends layout-post
 
 block content
 	.panel
@@ -21,18 +18,14 @@ block content
 				li.list-item-social.list-social-header
 					strong Share this post:
 				li.list-item-social
-				li.list-item-social
-					a(href='https://www.facebook.com/sharer.php?u={{blog.url | url_encode}}%2Fblog%2F{{post.slug | url_encode}}', target='_blank')
+					a(href='https://www.facebook.com/sharer.php?u=#{encodeURIComponent(post.url)}', target='_blank')
 						i.fa-social-icon.icon-rotate.fa.fa-facebook
 				li.list-item-social
-					a(href='http://linkedin.com/')
-						i.fa.fa-social-icon.icon-rotate.fa-linkedin
-				li.list-item-social
-					a(href='https://twitter.com/share?text={{post.title | url_encode }}&url={{blog.url | url_encode}}%2Fblog%2F{{post.slug | url_encode}}&via=twitterhandlenoatsign', target='_blank')
+					a(href='https://twitter.com/share?text=#{encodeURIComponent(post.title)}&url=#{encodeURIComponent(post.url)}&via=#{twitterHandle}', target='_blank')
 						i.fa.fa-social-icon.icon-rotate.fa-twitter
 				li.list-item-social
-					a(href='https://plus.google.com/share?url={{blog.url | url_encode}}%2Fblog%2F{{post.slug | url_encode}}', target='_blank')
-						i.fa.fa-social-icon.icon-rotate.fa-google-plus
+					a(href='http://www.linkedin.com/shareArticle?mini=true&url=#{encodeURIComponent(post.url)}&title=#{encodeURIComponent(post.title)}', target='_blank')
+						i.fa.fa-social-icon.icon-rotate.fa-linkedin
 		hr
 		p
 			!{post.content}

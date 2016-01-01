@@ -68,7 +68,6 @@ controller.get('/', function(req, res) {
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url;
   res.render('index', {
-    title: 'Home',
     post: post
   });
 });
@@ -76,12 +75,11 @@ controller.get('/', function(req, res) {
 /* GET contact page. */
 controller.get('/contact', function(req, res) {
   var post = {};
-  post.title = config.blog.title + ' Contact Page';
+  post.title = 'Contact';
   post.description = post.title;
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url + '/contact';
   res.render('contact', {
-    title: 'Contact',
     post: post
   });
 });
@@ -155,7 +153,7 @@ controller.get('/:category/:slug', function(req, res, next) {
     } else if (post === null) {
       res.sendStatus(404);
     } else {
-      post.url = config.blog.url + '/' + post.slug;
+      post.url = config.blog.url + '/' + Util.slugify(post.category) + '/' + post.slug;
       post.coverImageUrl = config.blog.url + '/images/uploads/' + post.coverImage;
       res.render('post', {
         'title': post.title,

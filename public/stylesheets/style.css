@@ -8,6 +8,7 @@ a:focus {
   text-decoration: none;
 }
 #custom-bootstrap-header-row.row {
+  padding-top: 10px;
   background-color: #f6f6f6;
   margin: 0;
 }

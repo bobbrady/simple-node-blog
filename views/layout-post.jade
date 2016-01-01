@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+	head
+		include ./includes/head-meta.jade
+	body
+		include ./includes/header.jade
+		// Begin Body
+		.container
+			.row
+				.col.col-md-8
+					include ./includes/flash-messages.jade
+					block content
+				.col.col-md-4
+					block sidebar
+						include ./includes/default-sidebar.jade
+			.row
+				.col-lg-12
+			block footer
+				include ./includes/footer.jade
+			// script references
+			script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+			script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js' integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS' crossorigin='anonymous')
