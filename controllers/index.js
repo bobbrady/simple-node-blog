@@ -9,7 +9,7 @@ var Util = require('../util/blog-util');
 var gmailer = require('../util/gmailer');
 var Post = require('../models/post');
 var env = process.env.NODE_ENV || 'development';
-var config = require('../config/config.'+env);
+var config = require('../config/config.' + env);
 var util = require('util');
 
 var getPaginateOptions = function(req) {
@@ -63,7 +63,7 @@ var getCategoryDTO = function(options, query, cb) {
 /* GET home page. */
 controller.get('/', function(req, res) {
   var post = {};
-  post.title =  config.blog.title + ' Home';
+  post.title = config.blog.title + ' Home';
   post.description = config.blog.description;
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url;
@@ -75,8 +75,8 @@ controller.get('/', function(req, res) {
 
 /* GET contact page. */
 controller.get('/contact', function(req, res) {
-   var post = {};
-  post.title =  config.blog.title + ' Contact Page';
+  var post = {};
+  post.title = config.blog.title + ' Contact Page';
   post.description = post.title;
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url + '/contact';
@@ -93,12 +93,12 @@ controller.post('/contact', function(req, res) {
     },
     function(result, callback) {
       var message = util.format(config.gmailer.text, req.body.contactName, req.body.contactEmail,
-          req.body.contactMessage);
+        req.body.contactMessage);
       gmailer.sendMail({
         from: config.gmailer.from,
         to: config.gmailer.to,
         subject: config.gmailer.subject,
-        text:message
+        text: message
       }, callback);
     }
   ], function(err, result) {
@@ -155,6 +155,8 @@ controller.get('/:category/:slug', function(req, res, next) {
     } else if (post === null) {
       res.sendStatus(404);
     } else {
+      post.url = config.blog.url + '/' + post.slug;
+      post.coverImageUrl = config.blog.url + '/images/uploads/' + post.coverImage;
       res.render('post', {
         'title': post.title,
         'post': post

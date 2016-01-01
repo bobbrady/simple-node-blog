@@ -28,6 +28,7 @@ var app = express();
 // Add globals
 app.locals.adminEnabled = config.adminEnabled;
 app.locals.blogTitle = config.blog.title;
+app.locals.disqusName = config.blog.disqusName;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
