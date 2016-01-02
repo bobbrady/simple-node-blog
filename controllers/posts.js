@@ -16,13 +16,20 @@ controller.post('/', isAuthenticated, function(req, res) {
   var description = req.body.description;
   var content = req.body.content;
   var coverImage = null;
+  var coverImageAlt= req.body.coverImageAlt;
+  var thumbnailImage = null;
+  var thumbnailImageAlt = req.body.thumbnailImageAlt;
   var homePage = req.body.homePage;
 
-  if (req.files && req.files[0]) {
-    coverImage = req.files[0].originalname;
-    console.log('Uploading File ', coverImage);
+   console.log('req.files %j', req.files);
+
+  if (req.files) {
+    coverImage = req.files.coverImage[0].originalname;
+    thumbnailImage = req.files.thumbnailImage[0].originalname;
+    console.log('Uploading Files %s, %s ', coverImage, thumbnailImage);
   } else {
     coverImage = 'noimage.png';
+    thumbnailImage = 'noimage.png';
   }
 
   var post = new Post({
@@ -32,7 +39,10 @@ controller.post('/', isAuthenticated, function(req, res) {
     lead: lead,
     description: description,
     content: content,
-    coverImage: coverImage
+    coverImage: coverImage,
+    coverImageAlt: coverImageAlt,
+    thumbnailImage: thumbnailImage,
+    thumbnailImageAlt: thumbnailImageAlt
   });
 
   async.waterfall([
@@ -103,11 +113,15 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
   var description = req.body.description;
   var content = req.body.content;
   var coverImage = null;
+  var coverImageAlt = req.body.coverImageAlt;
+  var thumbnailImage = null;
+  var thumbnailImageAlt = req.body.thumbnailImageAlt;
   var homePage = req.body.homePage;
 
-  if (req.files && req.files[0]) {
-    coverImage = req.files[0].originalname;
-    console.log('Uploading File ', coverImage);
+  if (req.files) {
+    coverImage = req.files.coverImage[0].originalname;
+    thumbnailImage = req.files.thumbnailImage[0].originalname;
+    console.log('Uploading Files %s, %s ', coverImage, thumbnailImage);
   } else {
     coverImage = 'noimage.png';
   }
@@ -120,7 +134,10 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
     lead: lead,
     description: description,
     content: content,
-    coverImage: coverImage
+    coverImage: coverImage,
+    coverImageAlt: coverImageAlt,
+    thumbnailImage: thumbnailImage,
+    thumbnailImageAlt: thumbnailImageAlt
   };
 
   console.log('Updated Post: %j', updatedPost);

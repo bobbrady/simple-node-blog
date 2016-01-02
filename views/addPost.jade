@@ -39,6 +39,19 @@ block content
 		.form-group
 			label Cover Image
 			input.form-control(name='coverImage', type='file')
+		.form-group
+			label Cover Image Alt
+			.row
+				.col-sm-9
+					input.form-control(name='coverImageAlt', type='text')
+		.form-group
+			label Thumbnail Image
+			input.form-control(name='thumbnailImage', type='file')
+		.form-group
+			label Thumbnail Image Alt
+			.row
+				.col-sm-9
+					input.form-control(name='thumbnailImageAlt', type='text')
 		input.btn.btn-default(name='submit', type='submit', value='Add')
 		script(src='/ckeditor/ckeditor.js')
 		script

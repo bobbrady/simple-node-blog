@@ -40,10 +40,22 @@ block content
 			label Content
 			textarea.form-control(id='content', name='content', required)
 				| #{post.content}
-
 		.form-group
 			label Cover Image (current value: #{post.coverImage})
 			input.form-control(name='coverImage', type='file')
+		.form-group
+			label Cover Image Alt
+			.row
+				.col-sm-9
+					input.form-control(name='coverImageAlt', type='text', value='#{post.coverImageAlt}')
+		.form-group
+			label Thumbnail Image (current value: #{post.thumbnailImage})
+			input.form-control(name='thumbnailImage', type='file')
+		.form-group
+			label Thumbnail Image Alt
+			.row
+				.col-sm-9
+					input.form-control(name='thumbnailImageAlt', type='text', value='#{post.thumbnailImageAlt}')
 		input.btn.btn-default(name='submit', type='submit', value='Update')
 		script(src='/ckeditor/ckeditor.js')
 		script

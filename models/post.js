@@ -41,7 +41,15 @@ var PostSchema = mongoose.Schema({
 	},
 	coverImage: {
 		type: String,
-		required: false
+	},
+	thumbnailImage: {
+		type: String,
+	},
+	coverImageAlt: {
+		type: String,
+	},
+	thumbnailImageAlt: {
+		type: String,
 	}
 });
 

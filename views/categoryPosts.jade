@@ -8,7 +8,7 @@ block posts
 			ul.list-thumbnail
 				a(href='/#{post.slug}/#{catPost.slug}')
 					li.list-item-thumbnail
-						img.image-responsive(src='/images/uploads/#{catPost.coverImage}', alt='#{catPost.coverImageAlt}')
+						img.image-responsive(src='/images/uploads/#{catPost.thumbnailImage}', alt='#{catPost.thumbnailImageAlt}')
 						h3 #{catPost.title}
 						p.lead #{catPost.lead}
 					hr

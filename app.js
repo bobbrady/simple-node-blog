@@ -12,8 +12,8 @@ var connectFlash = require('connect-flash');
 var multer = require('multer');
 var flash = require('connect-flash');
 var env = process.env.NODE_ENV || 'development';
-var config = require('./config/config.'+env);
-var mongoose =require('mongoose');
+var config = require('./config/config.' + env);
+var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 
 mongoose.connect(config.dbConnection);
@@ -43,17 +43,23 @@ app.use(methodOverride('_method'));
 
 // File upload confguraation
 var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images/uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
+	destination: function(req, file, cb) {
+		cb(null, './public/images/uploads');
+	},
+	filename: function(req, file, cb) {
+		cb(null, file.originalname);
+	}
 });
 
 app.use(multer({
 	storage: storage
-}).any());
+}).fields([{
+	name: 'coverImage',
+	maxCount: 1
+}, {
+	name: 'thumbnailImage',
+	maxCount: 1
+}]));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -88,7 +94,7 @@ app.use(function(req, res, next) {
 });
 
 // Enable public and admin routes based on env config
-if(config.adminEnabled) {
+if (config.adminEnabled) {
 	app.use('/posts', postController);
 	app.use('/users', userController);
 	app.use('/categories', categoryController);
