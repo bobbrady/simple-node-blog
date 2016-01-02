@@ -2,17 +2,9 @@ meta(charset='utf-8')
 meta(http-equiv='X-UA-Compatible', content='IE=edge')
 meta(name='viewport', content='width=device-width, initial-scale=1')
 
-// Page Meta Tags
-title #{post.title}
-meta(name='description', content='#{post.description}')
-// For successful FB crawler canonical url and og:url need to be the same
-link(rel='canonical', href='#{post.url}')
-
-link(rel='icon', href='../../favicon.ico')
-
-
 block meta
 
+link(rel='icon', href='../../favicon.ico')
 // Bootstrap core CSS
 link(rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
 link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous')
