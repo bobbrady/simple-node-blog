@@ -5,12 +5,11 @@ block content
 		h1.page-header
 			| #{post.title}
 		hr
-		img.img-responsive.center-block(src='/images/uploads/#{post.coverImage}', alt='#{post.coverImageAlt}')
-		hr
-		p.lead
-			| !{post.lead}
-		p
-			|	!{post.content}
+		ul.list-thumbnail
+			li.list-item-thumbnail
+				img.image-responsive(src='/images/uploads/#{post.coverImage}', alt='#{post.coverImageAlt}')
+				h2 #{post.title}
+				p.lead #{post.lead}
 		hr
 		block posts
 		if adminEnabled && user

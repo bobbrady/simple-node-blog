@@ -2,21 +2,16 @@ extends category
 
 block posts
 	h2
-		|	!{post.title} Posts
+		|	Recent !{post.title} Posts
 	if posts
 		each catPost, i in posts
-			h3
-				a(href='/#{post.slug}/#{catPost.slug}') #{catPost.title}
-			p
-				span.glyphicon.glyphicon-time
-				|  Posted on #{catPost.created.toDateString().substr(4,12)}
-			a(href='/#{post.slug}/#{catPost.slug}')
-				img.img-responsive(src='/images/uploads/#{catPost.coverImage}', alt='')
-			p.lead
-				| !{catPost.lead}
-			a.btn.btn-danger(href='/#{post.slug}/#{catPost.slug}')
-				| Read More
-				span.glyphicon.glyphicon-chevron-right
+			ul.list-thumbnail
+				a(href='/#{post.slug}/#{catPost.slug}')
+					li.list-item-thumbnail
+						img.image-responsive(src='/images/uploads/#{catPost.coverImage}', alt='#{catPost.coverImageAlt}')
+						h3 #{catPost.title}
+						p.lead #{catPost.lead}
+					hr
 			if adminEnabled && user
 				p
 				form.form.btn-inline(role='form' method='post' action='/posts/#{catPost.slug}?_method=DELETE')
