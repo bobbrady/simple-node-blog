@@ -63,7 +63,7 @@ var getCategoryDTO = function(options, query, cb) {
 /* GET home page. */
 controller.get('/', function(req, res) {
   var post = {};
-  post.title = config.blog.title + ' Home';
+  post.category = 'Home';
   post.description = config.blog.description;
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url;
@@ -75,11 +75,23 @@ controller.get('/', function(req, res) {
 /* GET contact page. */
 controller.get('/contact', function(req, res) {
   var post = {};
-  post.title = 'Contact';
+  post.category = 'Contact';
   post.description = post.title;
   post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
   post.url = config.blog.url + '/contact';
   res.render('contact', {
+    post: post
+  });
+});
+
+/* GET contact page. */
+controller.get('/privacy-policy', function(req, res) {
+  var post = {};
+  post.category = 'Privacy';
+  post.description = post.title;
+  post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
+  post.url = config.blog.url + '/privacy-policy';
+  res.render('privacy-policy', {
     post: post
   });
 });
