@@ -8,7 +8,10 @@ controller.get('/', function(req, res) {
 });
 
 controller.get('/register', function(req, res) {
+	var post = {};
+	post.category = 'Register';
 	res.render('register', {
+		post: post,
 		"title": 'Register'
 	});
 });
@@ -50,8 +53,11 @@ controller.post('/register', function(req, res) {
 });
 
 controller.get('/login', function(req, res) {
+	var post = {};
+	post.category = 'Login';
 	res.render('login', {
-		"title": 'Login'
+		title: 'Login',
+		post: post
 	});
 });
 

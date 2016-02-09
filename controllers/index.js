@@ -96,6 +96,18 @@ controller.get('/privacy-policy', function(req, res) {
   });
 });
 
+/* GET contact page. */
+controller.get('/terms-conditions', function(req, res) {
+  var post = {};
+  post.category = 'Terms';
+  post.description = post.title;
+  post.coverImageUrl = config.blog.url + '/images/uploads/' + config.blog.homeImage;
+  post.url = config.blog.url + '/terms-conditons';
+  res.render('terms-conditions', {
+    post: post
+  });
+});
+
 controller.post('/contact', function(req, res) {
   async.waterfall([
     function(callback) {

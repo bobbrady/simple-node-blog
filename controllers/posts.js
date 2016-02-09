@@ -72,12 +72,14 @@ controller.post('/', isAuthenticated, function(req, res) {
 });
 
 controller.get('/addPost', isAuthenticated, function(req, res) {
+  var post = {category: 'AddPost'};
   Category.find({}).sort({
     'name': 1
   }).exec(function(err, categories) {
     res.render('addPost', {
-      'title': 'Add Post',
-      'categories': categories
+      post: post,
+      title: 'Add Post',
+      categories: categories
     });
   });
 });
