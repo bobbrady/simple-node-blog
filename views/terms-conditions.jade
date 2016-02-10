@@ -3,14 +3,16 @@ extends layout-post
 block content
 	.panel
 		h1.page-header
-			| Terms and Conditions of www.bradythink.com
+			| Terms and Conditions
 		p
-			| Below are the Terms and Conditions for use of www.fubar.com. Please read these carefully. If you need to contact us regarding any aspect  of the following terms of use of our website, please contact us at the email address admin@fubar.com.
+			| Below are the Terms and Conditions for use of www.bradythink.com. Please read these carefully. If you need to contact us regarding any aspect  of the following terms of use of our website, please contact us at the email address
+			a(href='mailto:#{toEmail}' target='_blank')
+				|  #{toEmail}
 		p
-			| By accessing the content of www.fubar.com ( hereafter referred to as website ) you agree to the terms and conditions set out herein and  also accept our
-			a(href='http://www.fubar.com/privacy-policy')
-				| Privacy Policy
-			If you do not agree to any of the terms and conditions you should not continue  to use the Website and leave immediately.
+			| By accessing the content of www.bradythink.com ( hereafter referred to as website ) you agree to the terms and conditions set out herein and  also accept our
+			a(href='/privacy-policy' target='_blank')
+				|  Privacy Policy
+			|. If you do not agree to any of the terms and conditions you should not continue  to use the Website and leave immediately.
 		p
 			| You agree that you shall not use the website for any illegal purposes, and that you will respect all applicable laws and regulations.
 		p
@@ -20,7 +22,7 @@ block content
 		p
 			| You agree to be fully responsible for any claim, expense, losses, liability, costs including legal fees incurred by us arising from any infringement of the terms and conditions in this agreement and to which you will have agreed if you continue to use the website.
 		p
-			| The reproduction, distribution in any method whether online or offline is strictly prohibited. The work on the website and the images,  logos, text and other such information is the property of www.fubar.com ( unless otherwise stated ).
+			| The reproduction, distribution in any method whether online or offline is strictly prohibited. The work on the website and the images,  logos, text and other such information is the property of www.bradythink.com ( unless otherwise stated ).
 		h2
 			| Disclaimer
 		p

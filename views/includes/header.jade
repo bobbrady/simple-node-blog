@@ -5,50 +5,50 @@
 	.row
 		.col-md-12
 			// Navigation
-			nav#custom-bootstrap-menu.navbar.navbar-default.navbar-static-top(role='navigation')
-				.container
-					// Brand and toggle get grouped for better mobile display
-					.navbar-header
-						button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-							span.sr-only Toggle navigation
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
-					// Collect the nav links, forms, and other content for toggling
-					#bs-example-navbar-collapse-1.collapse.navbar-collapse
-						ul.nav.navbar-nav
-							li(class=(post.category == 'Home' ? 'active' : ''))
-								a(href='/') Home
-							li(class=(title == 'Node.js' ? 'active' : ''))
+			nav.navbar.navbar-default(role='navigation')
+				.navbar-header
+					button.navbar-toggle(type='button', data-target='#navbarCollapse', data-toggle='collapse')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+
+				#navbarCollapse.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						li(class=(post && post.category == 'Home' ? 'active' : ''))
+							a(href='/') Home
+						li(class=(post && post.category == 'nodejs' ? 'active' : ''))
 								a(href='/nodejs') Node.js
-							li.dropdown(class=(post.category == 'About' ||
-							post.category == 'Privacy' || post.category == 'Terms'? 'active' : ''))
+						li.dropdown(class=(post && (post.category == 'About' ||
+							post.category == 'Privacy' || post.category == 'Terms')? 'active' : ''))
 								a.dropdown-toggle(href='#', data-toggle='dropdown')
 									| About
 									b.caret
 								ul.dropdown-menu
-									li(class=(post.category == 'About'? 'active' : ''))
+									li(class=(post && post.category == 'About'? 'active' : ''))
 										a(href='/about') About BradyThink
-									li(class=(post.category == 'Privacy' ? 'active' : ''))
+									li(class=( post && post.category == 'Privacy' ? 'active' : ''))
 										a(href='/privacy-policy') Privacy Policy
-									li(class=(post.category == 'Terms' ? 'active' : ''))
+									li(class=(post && post.category == 'Terms' ? 'active' : ''))
 										a(href='/terms-conditions') Terms and Conditions
-							li(class=(title == 'Contact' ? 'active' : ''))
-								a(href='/contact') Contact
-							if adminEnabled
+						li(class=(post && post.category == 'Contact' ? 'active' : ''))
+							a(href='/contact') Contact
+						if adminEnabled
 								li.dropdown
-									a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+									a.dropdown-toggle(href='#', data-toggle='dropdown', role='button',
+									aria-haspopup='true', aria-expanded='false')
 										| Admin
 										span.caret
 									ul.dropdown-menu
 										if !user
-											li(class=(title == 'Register' ? 'active' : ''))
+											li
 												a(href='/users/register') Register
 											li(class=(title == 'Login' ? 'active' : ''))
 												a(href='/users/login') Login
 										if user
-											li(class=(title == 'Add Post' ? 'active' : ''))
+											li
 												a(href='/posts/addPost') Add Post
 											li
 												a(href='/users/logout') Log Out
+
 

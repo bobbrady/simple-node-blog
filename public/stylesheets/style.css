@@ -1,5 +1,6 @@
 body {
   background-color: #e8e8e8;
+  color: #000;
 }
 a,
 a:hover,
@@ -12,24 +13,16 @@ a:focus {
   background-color: #f6f6f6;
   margin: 0;
 }
-#custom-bootstrap-menu.navbar-default .navbar-nav {
-  width: 100%;
-  text-align: center;
+.navbar-default.navbar-nav > li > a {
+  color: #000;
 }
-#custom-bootstrap-menu.navbar-default .navbar-nav > li {
-  float: none;
-  display: inline-block;
-}
-#custom-bootstrap-menu.navbar-default .navbar-nav > li > a {
-  color: #333;
-}
-#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:hover,
-#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
   color: #b90504;
 }
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus,
-#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover {
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
   color: #b90504;
   background-color: #f6f6f6;
 }
@@ -45,7 +38,7 @@ hr {
 .list-social {
   margin-top: 10px;
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
 }
 .list-social-header {
   margin-right: 10px;
@@ -57,10 +50,10 @@ hr {
 .fa-social-icon {
   background: #205d7a;
   color: #fff;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 20px;
-  font-size: 23px;
+  font-size: 20px;
   text-align: center;
   margin-right: 15px;
   padding-top: 15%;
@@ -85,7 +78,7 @@ hr {
   list-style-type: none;
 }
 .list-thumbnail a li p {
-  color: #333;
+  color: #000;
 }
 .list-item-thumbnail {
   padding: 10px;
@@ -101,4 +94,14 @@ hr {
 .list-item-thumbnail:hover {
   background: #eee;
   cursor: pointer;
+}
+@media (min-width: 768px) {
+  .navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+  }
+  .navbar .navbar-collapse {
+    text-align: center;
+  }
 }
