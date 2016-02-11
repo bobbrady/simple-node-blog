@@ -60,7 +60,6 @@ var getCategoryDTO = function(options, query, cb) {
   ], cb);
 };
 
-/* GET home page. */
 controller.get('/', function(req, res) {
   var post = {};
   post.category = 'Home';
@@ -72,7 +71,6 @@ controller.get('/', function(req, res) {
   });
 });
 
-/* GET contact page. */
 controller.get('/contact', function(req, res) {
   var post = {};
   post.category = 'Contact';
@@ -84,7 +82,17 @@ controller.get('/contact', function(req, res) {
   });
 });
 
-/* GET contact page. */
+controller.get('/about', function(req, res) {
+  var post = {};
+  post.category = 'About';
+  post.description = 'About BradyThink';
+  post.coverImageUrl = config.blog.url + '/images/uploads/' + 'BradyThink-BobBrady-Image.png';
+  post.url = config.blog.url + '/about';
+  res.render('about', {
+    post: post
+  });
+});
+
 controller.get('/privacy-policy', function(req, res) {
   var post = {};
   post.category = 'Privacy';
@@ -96,7 +104,6 @@ controller.get('/privacy-policy', function(req, res) {
   });
 });
 
-/* GET contact page. */
 controller.get('/terms-conditions', function(req, res) {
   var post = {};
   post.category = 'Terms';
