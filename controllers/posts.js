@@ -16,12 +16,12 @@ controller.post('/', isAuthenticated, function(req, res) {
   var description = req.body.description;
   var content = req.body.content;
   var coverImage = null;
-  var coverImageAlt= req.body.coverImageAlt;
+  var coverImageAlt = req.body.coverImageAlt;
   var thumbnailImage = null;
   var thumbnailImageAlt = req.body.thumbnailImageAlt;
   var homePage = req.body.homePage;
 
-   console.log('req.files %j', req.files);
+  console.log('req.files %j', req.files);
 
   if (req.files) {
     coverImage = req.files.coverImage[0].originalname;
@@ -72,7 +72,9 @@ controller.post('/', isAuthenticated, function(req, res) {
 });
 
 controller.get('/addPost', isAuthenticated, function(req, res) {
-  var post = {category: 'AddPost'};
+  var post = {
+    category: 'AddPost'
+  };
   Category.find({}).sort({
     'name': 1
   }).exec(function(err, categories) {
@@ -120,14 +122,6 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
   var thumbnailImageAlt = req.body.thumbnailImageAlt;
   var homePage = req.body.homePage;
 
-  if (req.files) {
-    coverImage = req.files.coverImage[0].originalname;
-    thumbnailImage = req.files.thumbnailImage[0].originalname;
-    console.log('Uploading Files %s, %s ', coverImage, thumbnailImage);
-  } else {
-    coverImage = 'noimage.png';
-  }
-
   var updatedPost = {
     title: title,
     slug: Util.slugify(title),
@@ -136,11 +130,22 @@ controller.put('/:slug', isAuthenticated, function(req, res) {
     lead: lead,
     description: description,
     content: content,
-    coverImage: coverImage,
     coverImageAlt: coverImageAlt,
-    thumbnailImage: thumbnailImage,
     thumbnailImageAlt: thumbnailImageAlt
   };
+
+
+  if (req.files && (req.files.coverImage)) {
+    coverImage = req.files.coverImage[0].originalname;
+    updatedPost.coverImage = coverImage;
+    console.log('Uploading Files %s', coverImage);
+  }
+
+  if (req.files && (req.files.thumbnailImage)) {
+    thumbnailImage = req.files.thumbnailImage[0].originalname;
+    updatedPost.thumbnailImage = thumbnailImage;
+    console.log('Uploading Files %s', thumbnailImage);
+  }
 
   console.log('Updated Post: %j', updatedPost);
 
